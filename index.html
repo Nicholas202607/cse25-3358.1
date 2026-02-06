@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nightfall Cinematheque — Horror Movies Experience</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="An immersive horror movies experience — trailers, curated picks, ambient audio, and cinematic effects.">
+</head>
+<body>
+  <div id="ambient"></div>
+
+  <header class="site-header">
+    <div class="brand">
+      <svg width="48" height="48" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2L2 7v7c0 5 4 9 10 9s10-4 10-9V7l-10-5z"/></svg>
+      <h1>Nightfall Cinematheque</h1>
+    </div>
+    <nav>
+      <button id="audioToggle" aria-pressed="false" title="Toggle ambient audio">Enable Ambience</button>
+      <button id="nightModeToggle" title="Enter Nightmare Mode">Nightmare Mode</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="hero-inner">
+        <h2 class="flicker">Tonight's Feature</h2>
+        <p class="lead">Enter if you dare — curated horror, immersive audio & cinematic glitches.</p>
+        <div class="cta-row">
+          <button class="cta primary" data-action="explore">Explore Collection</button>
+          <button class="cta ghost" id="playTrailer" data-trailer="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1">Play Trailer</button>
+        </div>
+        <div class="scanlines" aria-hidden="true"></div>
+        <div class="vhs-glow" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section class="collection" id="collection" aria-label="Horror picks">
+      <h3>Curated Picks</h3>
+      <div class="cards">
+        <!-- Example card, duplicate/replace for more movies -->
+        <article class="card" tabindex="0" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+          <div class="poster" style="background-image:url('https://images.unsplash.com/photo-1517604931442-3d33a8a961a1?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder');">
+            <div class="glitch"></div>
+          </div>
+          <div class="meta">
+            <h4>Axis of Night</h4>
+            <p class="tagline">A whisper in the walls, a light that never reaches the porch.</p>
+            <div class="meta-actions">
+              <button class="btn-play">Watch Trailer</button>
+              <button class="btn-more">Details</button>
+            </div>
+          </div>
+        </article>
+        <!-- Add more cards here -->
+      </div>
+    </section>
+
+    <section class="immersive" id="immersive">
+      <h3>Immersive Mode</h3>
+      <p>Slow scroll to step through three cinematic chapters — the site will alter atmosphere and audio.</p>
+      <div class="scenes">
+        <div class="scene">Chapter I — Arrival</div>
+        <div class="scene">Chapter II — The Echo</div>
+        <div class="scene">Chapter III — The Hollow</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <small>&copy; Nightfall Cinematheque — For best experience use headphones. Press <kbd>m</kbd> to toggle ambience.</small>
+  </footer>
+
+  <!-- Trailer Modal -->
+  <div id="modal" class="modal" role="dialog" aria-hidden="true" aria-label="Trailer">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel" role="document">
+      <button class="modal-close" aria-label="Close trailer" data-close>✕</button>
+      <div class="modal-content">
+        <iframe id="modalVideo" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen title="Trailer"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js" type="module"></script>
+</body>
+</html>
