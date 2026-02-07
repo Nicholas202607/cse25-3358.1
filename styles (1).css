@@ -1,0 +1,153 @@
+:root{
+  --bg:#050405;
+  --accent:#c0392b;
+  --muted:#9aa0a6;
+  --glass: rgba(255,255,255,0.03);
+  --grain: rgba(255,255,255,0.02);
+  --max-width:1200px;
+  --transition:300ms cubic-bezier(.2,.9,.3,1);
+  font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color-scheme: dark;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:#eee;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Background video */
+.bg-media{
+  position:fixed;
+  right:0;left:0;top:0;bottom:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-3;
+  filter:contrast(0.95) brightness(0.55) saturate(0.9);
+  transform:scale(1.02);
+}
+
+/* Overlay to darken and apply vignette */
+.overlay{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+}
+
+/* Header */
+.site-header{
+  position:fixed;
+  top:16px;
+  left:16px;
+  right:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:40;
+  pointer-events:auto;
+}
+.top-nav a{color:var(--muted); margin-left:14px; text-decoration:none}
+.cta{
+  background:linear-gradient(90deg, rgba(192,57,43,0.95), rgba(155,21,21,0.9));
+  color:#fff;
+  border:none;
+  padding:10px 16px;
+  border-radius:8px;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 6px 18px rgba(0,0,0,0.6);
+}
+
+/* Hero */
+.hero{
+  min-height:70vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  pointer-events:auto;
+  padding:40px 16px;
+}
+.title{
+  font-family:"Cinzel", "Times New Roman", serif;
+  letter-spacing:4px;
+  font-size:clamp(36px,8vw,96px);
+  margin:0;
+  color:rgba(255,255,255,0.95);
+  text-shadow:0 6px 28px rgba(0,0,0,0.8);
+}
+.tagline{color:var(--muted); margin-top:12px; font-size:1.2rem}
+.controls{margin-top:18px}
+.control{margin:6px; padding:8px 12px; border-radius:6px; border:1px solid rgba(255,255,255,0.06);
+  background:transparent; color:#eee; cursor:pointer}
+
+/* Film grain and vignette */
+.grain{
+  position:absolute;
+  inset:0;
+  background-image:radial-gradient(circle at 30% 20%, rgba(255,255,255,0.02), transparent 10%),
+                    radial-gradient(circle at 70% 80%, rgba(255,255,255,0.01), transparent 12%);
+  mix-blend-mode:overlay;
+  pointer-events:none;
+}
+.vignette{
+  position:absolute;
+  inset:0;
+  box-shadow:inset 0 60px 120px rgba(0,0,0,0.8), inset 0 -60px 120px rgba(0,0,0,0.8);
+  pointer-events:none;
+}
+
+/* Gallery */
+main{position:relative; z-index:20; max-width:var(--max-width); margin:0 auto; padding:80px 20px}
+.gallery h2, .about h2 {font-family:"Cinzel", serif; letter-spacing:2px; margin-bottom:14px}
+.thumbs{display:flex; gap:16px; flex-wrap:wrap}
+.thumb{
+  width:calc(33.333% - 10px);
+  min-width:190px;
+  background:var(--glass);
+  border-radius:8px;
+  overflow:hidden;
+  padding:0;
+  border:1px solid rgba(255,255,255,0.03);
+  cursor:pointer;
+  position:relative;
+  text-align:left;
+}
+.thumb img{display:block; width:100%; height:140px; object-fit:cover; filter:grayscale(10%) saturate(.9)}
+.thumb-caption{display:block; padding:10px; color:var(--muted); font-size:0.95rem}
+
+/* Modal */
+.modal{
+  position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
+  background:rgba(0,0,0,0.7); z-index:60; padding:20px; visibility:hidden; opacity:0; transition:var(--transition);
+  pointer-events:none;
+}
+.modal[aria-hidden="false"]{visibility:visible; opacity:1; pointer-events:auto}
+.modal-content{max-width:1000px; width:100%; background:rgba(0,0,0,0.6); border-radius:10px; position:relative; padding:12px}
+.modal video{width:100%; height:auto; background:#000; display:block}
+.close{position:absolute; right:12px; top:8px; border:none; background:transparent; color:#fff; font-size:20px; cursor:pointer}
+
+/* Preloader */
+#preloader{position:fixed; inset:0; background:var(--bg); z-index:100; display:flex; align-items:center; justify-content:center; transition:opacity .6s}
+#preloader.hidden{opacity:0; visibility:hidden}
+.loader{color:var(--muted); letter-spacing:8px; font-weight:600}
+
+/* Responsive */
+@media(max-width:900px){
+  .thumb{width:calc(50% - 10px)}
+  .hero{min-height:60vh}
+}
+@media(max-width:560px){
+  .thumb{width:100%}
+}
+
+/* small glitch hover */
+.thumb:hover img{transform:translateY(-4px) skewX(-0.5deg); transition:transform .25s ease}
